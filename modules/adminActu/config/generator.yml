@@ -1,0 +1,49 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           peanutActu
+    theme:                 peanut
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          peanut_actu
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title:   News
+        
+        display: [=title, sfGuardUser, status]
+        
+        actions: ~
+        
+        object_actions:
+          "Change status":
+            action: changestatus
+          up:
+            action: promote
+          down:
+            action: demote
+          _edit:        ~
+          _delete:      ~
+
+        max_per_page:   15
+        
+        batch_actions:
+          status:     ~
+          _delete:    ~
+
+      filter:
+        display:           [title, status]
+      form:
+        display:
+          "General":        [title, slug]
+          "Content":        [content, excerpt, peanutSeo]
+          "Informations":   [status, author, created_at]
+
+      edit:    ~
+      new:     ~

@@ -1,0 +1,8 @@
+peanut_actu:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                peanutActu
+    module:               adminActu
+    prefix_path:          /adminActu
+    column:               id
+    with_wildcard_routes: true
