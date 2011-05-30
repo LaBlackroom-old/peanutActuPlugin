@@ -3,7 +3,6 @@ peanutActu:
     Timestampable: ~
     Sluggable:
       fields:      [title]
-    Sortable:      ~
     Seoable:       ~
   columns:
     id:

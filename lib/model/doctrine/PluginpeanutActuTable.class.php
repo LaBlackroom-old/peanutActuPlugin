@@ -16,4 +16,68 @@ class PluginpeanutActuTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('PluginpeanutActu');
     }
+    
+    
+    /**
+     * Retrieves actu object.
+     *
+     * @return peanutActu
+     */
+    public function getActu()
+    {
+      $p = $this->createQuery('p')
+              ->leftJoin('p.sfGuardUser s')
+              ->leftJoin('p.peanutSeo o')
+              ->orderBy('p.updated_at DESC');
+      
+      return $p;
+    }
+    
+    
+    /**
+     * Show an actu.
+     *
+     * @param  string|int $actu     The id or slug of actu
+     *
+     * @return peanutActu
+     */
+    public function showActu($actu)
+    {
+      $p = $this->getActu()
+              ->where('p.id = ? OR p.slug = ?', array($actu, $actu));
+      
+      return $p;
+    }
+    
+    /**
+     * Get all actus.
+     *
+     * @param  string     $status   The status of actus
+     *
+     * @return peanutActu
+     */
+    public function getActus($status = 'publish')
+    {
+      $p = $this->getActu()
+              ->where('p.status = ?', $status);
+      
+      return $p;
+    }
+    
+    
+    /**
+     * Retrieves actus object by author.
+     *
+     * @param  string|int $author   The id or username of author
+     * @param  string     $status   The status of actu
+     *
+     * @return peanutActu
+     */
+    public function getActusByAuthor($author, $status = 'publish')
+    {
+      $p = $this->getActus()
+              ->andWhere('s.id = ? OR s.username = ?', array($author, $author));
+      
+      return $p;
+    }
 }
