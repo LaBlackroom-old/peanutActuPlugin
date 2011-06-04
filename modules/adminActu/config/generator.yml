@@ -24,10 +24,6 @@ generator:
         object_actions:
           "Change status":
             action: changestatus
-          up:
-            action: promote
-          down:
-            action: demote
           _edit:        ~
           _delete:      ~
 

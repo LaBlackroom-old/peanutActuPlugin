@@ -1,0 +1,7 @@
+peanutSettings:
+  peanutSettings_18:
+    name: actu_max_last
+    value: 5
+  peanutSettings_19:
+    name: actu_per_page
+    value: 10

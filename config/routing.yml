@@ -1,3 +1,26 @@
+# www
+actu_show:
+  url:             /actu/:slug.:sf_format
+  class:           sfDoctrineRoute
+  options:         { model: peanutActu, type: object }
+  params:          { module: actu, action: show }
+  requirements:    { sf_method: get, sf_format: html }
+
+actu_list:
+  url:             /actus/index.:sf_format
+  class:           sfDoctrineRoute
+  options:         { model: peanutActu, type: object }
+  params:          { module: actu, action: list }
+  requirements:    { sf_method: get, sf_format: html|xml|json }
+
+actu_author:
+  url:             /actus/author/:author.:sf_format
+  class:           sfDoctrineRoute
+  options:         { model: peanutActu, type: object }
+  params:          { module: actu, action: listByAuthor }
+  requirements:    { sf_method: get, sf_format: html|xml|json }
+  
+#admin
 peanut_actu:
   class: sfDoctrineRouteCollection
   options:

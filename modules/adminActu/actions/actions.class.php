@@ -13,6 +13,11 @@ require_once dirname(__FILE__).'/../lib/adminActuGeneratorHelper.class.php';
  */
 class adminActuActions extends autoAdminActuActions
 {
+  protected function addSortQuery($query)
+  {
+    $query->addOrderBy('updated_at desc');
+  }
+  
   public function executeChangestatus()
   {
     $object = Doctrine_Core::getTable('peanutActu')->findOneById($this->getRequestParameter('id'));

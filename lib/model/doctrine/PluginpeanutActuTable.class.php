@@ -14,7 +14,7 @@ class PluginpeanutActuTable extends Doctrine_Table
      */
     public static function getInstance()
     {
-        return Doctrine_Core::getTable('PluginpeanutActu');
+        return Doctrine_Core::getTable('peanutActu');
     }
     
     
@@ -60,6 +60,22 @@ class PluginpeanutActuTable extends Doctrine_Table
     {
       $p = $this->getActu()
               ->where('p.status = ?', $status);
+      
+      return $p;
+    }
+    
+    /**
+     * Get all actus.
+     *
+     * @param  string     $limit    Determines how much items you want (default 3)
+     * @param  string     $status   The status of actus
+     *
+     * @return peanutActu
+     */
+    public function getLastActus($limit = 3, $status = 'publish')
+    {
+      $p = $this->getActus()
+              ->limit($limit);
       
       return $p;
     }
