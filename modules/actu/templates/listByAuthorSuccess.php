@@ -4,6 +4,11 @@
 
   <h1><?php echo __('Last actualities for', null, 'peanutActu') . ' ' . $actus[0]['sfGuardUser']['username'] ?></h1>
   
+  <?php if(count($pager->getResults())): ?>
+  
+  <p><?php echo __('There is no results') ?></p>
+  
+  <?php else: ?>
   <?php foreach($pager->getResults() as $actu): ?>
 
   <article id="actu-<?php echo $actu['id'] ?>">
@@ -37,7 +42,7 @@
   </article>
 
   <?php endforeach; ?>
-  
+  <?php endif; ?>
 </section>
 
 <?php include_partial('pager', array('pager' => $pager, 'route' => 'actu_author',

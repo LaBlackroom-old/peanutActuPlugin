@@ -20,29 +20,62 @@ class actuActions extends sfActions
   public function executeList(sfWebRequest $request)
   {
     $actus = Doctrine_Core::getTable('peanutActu')->getActus();
-    $this->actus = $actus->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+    $items = $this->_processing($request, $actus);
+    $this->actus = $items;
     
-    $nbActus = peanutConfig::get('actu_per_page');
-    $numPage = $request->getParameter('page', 1);
-    
-    $this->pager = new sfDoctrinePager('peanutActu', $nbActus);
-    $this->pager->setQuery($actus);
-    $this->pager->setPage($numPage);
-    $this->pager->init();
+    if('html' === $request->getRequestFormat())
+    {
+      $nbActus = peanutConfig::get('actu_per_page');
+      $numPage = $request->getParameter('page', 1);
+
+      $this->pager = new sfDoctrinePager('peanutActu', $nbActus);
+      $this->pager->setQuery($actus);
+      $this->pager->setPage($numPage);
+      $this->pager->init();
+    }
   }
 
   public function executeListByAuthor(sfWebRequest $request)
   {
     $actus = Doctrine_Core::getTable('peanutActu')->getActusByAuthor($request->getParameter('author'));
-    $this->actus = $actus->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+    $items = $this->_processing($request, $actus);
+    $this->actus = $items;
     
-    $nbActus = peanutConfig::get('actu_per_page');
-    $numPage = $request->getParameter('page', 1);
+    if('html' === $request->getRequestFormat())
+    {
+      $nbActus = peanutConfig::get('actu_per_page');
+      $numPage = $request->getParameter('page', 1);
+
+      $this->pager = new sfDoctrinePager('peanutActu', $nbActus);
+      $this->pager->setQuery($actus);
+      $this->pager->setPage($numPage);
+      $this->pager->init();
+    }
+  }
+  
+  protected function _processing($request, $object)
+  {
+    $format = $request->getRequestFormat();
     
-    $this->pager = new sfDoctrinePager('peanutActu', $nbActus);
-    $this->pager->setQuery($actus);
-    $this->pager->setPage($numPage);
-    $this->pager->init();
+    if('json' === $format)
+    {   
+      $items = $object->execute();
+        
+      $fetch = array();
+      $i = 0;
+      foreach($items as $item)
+      {
+        $fetch[$i++] = $item->asArray();
+      }
+
+      $items = $fetch;
+    }
+    else
+    {
+      $items = $object->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+    }
+    
+    return $items;
   }
 
 }

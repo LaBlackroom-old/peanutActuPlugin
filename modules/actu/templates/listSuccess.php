@@ -4,6 +4,11 @@
 
   <h1><?php echo __('Last actualities', null, 'peanutActu') ?></h1>
   
+  <?php if(!count($pager->getResults())): ?>
+  
+  <p><?php echo __('There is no entries for your request!', null, 'peanutActu') ?></p>
+  
+  <?php else: ?>
   <?php foreach($pager->getResults() as $actu): ?>
 
   <article id="actu-<?php echo $actu['id'] ?>">
@@ -37,6 +42,7 @@
   </article>
 
   <?php endforeach; ?>
+  <?php endif; ?>
   
 </section>
 

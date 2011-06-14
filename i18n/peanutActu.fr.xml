@@ -20,6 +20,14 @@
         <source>News</source>
         <target>Actualités</target>
       </trans-unit>
+      <trans-unit>
+        <source>Last actualities</source>
+        <target>Les dernières actualités</target>
+      </trans-unit>
+      <trans-unit>
+        <source>There is no entries for your request!</source>
+        <target>Il n'y a pas de résultats pour cette page !</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
