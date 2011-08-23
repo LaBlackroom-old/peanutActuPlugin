@@ -71,5 +71,24 @@ abstract class PluginpeanutActuForm extends BasepeanutActuForm
     
     $this->embedRelation('peanutSeo');
     $this->widgetSchema['peanutSeo']->setLabel('SEO');
+    
+     $this->widgetSchema['author'] = new sfWidgetFormChoice(array(
+        'choices' => $this->_getUsers()
+    ));
+        
+    
+  }
+  
+  protected function _getUsers()
+  {
+    $users = array();
+    $choices = Doctrine::getTable('sfGuardUser')->getUsersWhereGroupIs('2')->execute();
+    
+    foreach($choices as $user)
+    {
+      $users[$user->getId()] = $user->getName();
+    }
+    
+    return $users;
   }
 }
