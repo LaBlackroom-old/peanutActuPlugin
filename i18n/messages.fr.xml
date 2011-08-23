@@ -8,6 +8,14 @@
         <source>News</source>
         <target>Actualités</target>
       </trans-unit>
+      <trans-unit>
+        <source>New AdminActu</source>
+        <target>Nouvelle actu</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit AdminActu</source>
+        <target>Editer l'actu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
